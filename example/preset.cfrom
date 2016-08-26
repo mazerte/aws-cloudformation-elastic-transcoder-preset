@@ -1,0 +1,115 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "Example of ElasticTranscoder Preset",
+    "Metadata": {
+
+    },
+    "Parameters": {
+      "ElasticTranscoderPresetLambdaName": {
+          "Description": "ElasticTranscoderPreset lambda name",
+          "Type": "String"
+      }
+    },
+    "Mappings": {
+
+    },
+    "Conditions": {
+
+    },
+    "Resources": {
+      "Mp4Preset": {
+         "Type": "Custom::ElasticTranscoderPreset",
+         "Version": "1.0",
+         "Properties": {
+            "ServiceToken": {"Fn::Join" : [":",[ "arn:aws:lambda", { "Ref": "AWS::Region" }, { "Ref": "AWS::AccountId" }, "function", { "Ref": "ElasticTranscoderPresetLambdaName" } ] ]},
+            "Name": "My Mp4 Preset",
+            "Description": "My Mp4 Preset",
+            "Container": "mp4",
+            "Video": {
+              "Codec": "H.264",
+              "CodecOptions": {
+                "InterlacedMode": "Progressive",
+                "MaxReferenceFrames": "3",
+                "Level": "3.1",
+                "ColorSpaceConversionMode": "None",
+                "Profile": "main"
+              },
+              "KeyframesMaxDist": "90",
+              "FixedGOP": "false",
+              "BitRate": "2200",
+              "FrameRate": "30",
+              "MaxWidth": "1280",
+              "MaxHeight": "720",
+              "SizingPolicy": "ShrinkToFit",
+              "PaddingPolicy": "NoPad",
+              "DisplayAspectRatio": "auto",
+              "Watermarks": [{
+                "Id": "TopLeft",
+                "MaxWidth": "10%",
+                "MaxHeight": "10%",
+                "SizingPolicy": "ShrinkToFit",
+                "HorizontalAlign": "Left",
+                "HorizontalOffset": "10%",
+                "VerticalAlign": "Top",
+                "VerticalOffset": "10%",
+                "Opacity": "100",
+                "Target": "Content"
+              }, {
+                "Id": "TopRight",
+                "MaxWidth": "10%",
+                "MaxHeight": "10%",
+                "SizingPolicy": "ShrinkToFit",
+                "HorizontalAlign": "Right",
+                "HorizontalOffset": "10%",
+                "VerticalAlign": "Top",
+                "VerticalOffset": "10%",
+                "Opacity": "100",
+                "Target": "Content"
+              }, {
+                "Id": "BottomLeft",
+                "MaxWidth": "10%",
+                "MaxHeight": "10%",
+                "SizingPolicy": "ShrinkToFit",
+                "HorizontalAlign": "Left",
+                "HorizontalOffset": "10%",
+                "VerticalAlign": "Bottom",
+                "VerticalOffset": "10%",
+                "Opacity": "100",
+                "Target": "Content"
+              }, {
+                "Id": "BottomRight",
+                "MaxWidth": "10%",
+                "MaxHeight": "10%",
+                "SizingPolicy": "ShrinkToFit",
+                "HorizontalAlign": "Right",
+                "HorizontalOffset": "10%",
+                "VerticalAlign": "Bottom",
+                "VerticalOffset": "10%",
+                "Opacity": "100",
+                "Target": "Content"
+              }]
+            },
+            "Audio": {
+              "Codec": "AAC",
+              "CodecOptions": {
+                "Profile": "AAC-LC"
+              },
+              "SampleRate": "48000",
+              "BitRate": "160",
+              "Channels": "2"
+            },
+            "Thumbnails": {
+              "Format": "png",
+              "Interval": "60",
+              "MaxWidth": "192",
+              "MaxHeight": "108",
+              "SizingPolicy": "ShrinkToFit",
+              "PaddingPolicy": "NoPad"
+            }
+         }
+      }
+    },
+    "Outputs": {
+
+    }
+}

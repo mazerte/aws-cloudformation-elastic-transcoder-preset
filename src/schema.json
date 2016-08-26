@@ -1,0 +1,209 @@
+{
+  "type": "object",
+  "required": [
+    "Name",
+    "Container",
+    "Description"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "Name": {
+      "type": "string"
+    },
+    "Container": {
+      "type": "string",
+      "enum": ["flac", "flv", "fmp4", "gif", "mp3", "mp4", "mpg", "mxf", "oga", "ogg", "ts", "webm"]
+    },
+    "Description": {
+      "type": "string"
+    },
+    "Audio": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "AudioPackingMode": {
+          "type": "string",
+          "enum": ["SingleTrack", "OneChannelPerTrack", "OneChannelPerTrackWithMosTo8Tracks"]
+        },
+        "BitRate": {
+          "type": "string",
+          "pattern": "^(6[4-9]|[7-9][0-9]|[12][0-9]{2}|3[01][0-9]|320)$"
+        },
+        "Channels": {
+          "type": "string",
+          "enum": ["auto", "0", "1", "2"]
+        },
+        "Codec": {
+          "type": "string",
+          "enum": ["AAC", "flac", "mp2", "mp3", "pcm", "vorbis"]
+        },
+        "CodecOptions": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "BitDepth": {
+              "type": "string",
+              "enum": ["16", "24"]
+            },
+            "BitOrder": {
+              "type": "string",
+              "enum": ["LittleEndian"]
+            },
+            "Profile": {
+              "type": "string",
+              "enum": ["auto", "AAC-LC", "HE-AAC", "HE-AACv2"]
+            },
+            "Signed": {
+              "type": "string",
+              "enum": ["Signed"]
+            }
+          }
+        },
+        "SampleRate": {
+          "type": "string",
+          "enum": ["auto", "22050", "32000", "44100", "48000", "96000"]
+        }
+      }
+    },
+    "Thumbnails": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "AspectRatio": {
+          "type": "string",
+          "enum": ["auto", "1:1", "4:3", "3:2", "16:9"]
+        },
+        "Format": {
+          "type": "string",
+          "enum": ["jpg", "png"]
+        },
+        "Interval": {
+          "type": "string"
+        },
+        "MaxHeight": {
+          "type": "string",
+          "pattern": "(auto|(9[6-9]|[1-8][0-9]{2}|9[0-8][0-9]|99[0-9]|[12][0-9]{3}|30[0-6][0-9]|307[0-2]))"
+        },
+        "MaxWidth": {
+          "type": "string",
+          "pattern": "(auto|(12[89]|1[3-9][0-9]|[2-9][0-9]{2}|[1-3][0-9]{3}|40[0-8][0-9]|409[0-6]))"
+        },
+        "PaddingPolicy": {
+          "type": "string",
+          "enum": ["Pad", "NoPad"]
+        },
+        "Resolution": {
+          "type": "string",
+          "pattern": "[0-9]+x[0-9]+"
+        },
+        "SizingPolicy": {
+          "type": "string",
+          "enum": ["Fit", "Fill", "Stretch", "Keep", "ShrinkToFit", "ShrinkToFill"]
+        }
+      }
+    },
+    "Video": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "AspectRatio": {
+          "type": "string",
+          "enum": ["auto", "1:1", "4:3", "3:2", "16:9"]
+        },
+        "BitRate": {
+          "type": "string"
+        },
+        "Codec": {
+          "type": "string",
+          "enum": ["gif", "H.264", "mpeg2", "v8"]
+        },
+        "CodecOptions": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "DisplayAspectRatio": {
+          "type": "string"
+        },
+        "FixedGOP": {
+          "type": "string",
+          "enum": ["true", "false"]
+        },
+        "FrameRate": {
+          "type": "string",
+          "enum": ["auto", "10", "15", "23.97", "24", "25", "29.97", "30", "60"]
+        },
+        "KeyframesMaxDist": {
+          "type": "string"
+        },
+        "MaxFrameRate": {
+          "type": "string",
+          "enum": ["auto", "10", "15", "23.97", "24", "25", "29.97", "30", "60"]
+        },
+        "MaxHeight": {
+          "type": "string",
+          "pattern": "(auto|(9[6-9]|[1-8][0-9]{2}|9[0-8][0-9]|99[0-9]|[12][0-9]{3}|30[0-6][0-9]|307[0-2]))"
+        },
+        "MaxWidth": {
+          "type": "string",
+          "pattern": "(auto|(12[89]|1[3-9][0-9]|[2-9][0-9]{2}|[1-3][0-9]{3}|40[0-8][0-9]|409[0-6]))"
+        },
+        "PaddingPolicy": {
+          "type": "string",
+          "enum": ["Pad", "NoPad"]
+        },
+        "Resolution": {
+          "type": "string",
+          "pattern": "(auto|[0-9]+x[0-9]+)"
+        },
+        "SizingPolicy": {
+          "type": "string",
+          "enum": ["Fit", "Fill", "Stretch", "Keep", "ShrinkToFit", "ShrinkToFill"]
+        },
+        "Watermarks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "HorizontalAlign": {
+                "type": "string",
+                "enum": ["Left", "Right", "Center"]
+              },
+              "HorizontalOffset": {
+                "type": "string"
+              },
+              "Id": {
+                "type": "string"
+              },
+              "MaxHeight": {
+                "type": "string"
+              },
+              "MaxWidth": {
+                "type": "string"
+              },
+              "Opacity": {
+                "type": "string",
+                "pattern": "^([0-9]|[1-8][0-9]|9[0-9]|100)$"
+              },
+              "SizingPolicy": {
+                "type": "string",
+                "enum": ["Fit", "Stretch", "ShrinkToFit"]
+              },
+              "Target": {
+                "type": "string",
+                "enum": ["Content", "Frame"]
+              },
+              "VerticalAlign": {
+                "type": "string",
+                "enum": ["Top", "Bottom", "Center"]
+              },
+              "VerticalOffset": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

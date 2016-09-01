@@ -115,7 +115,7 @@
         },
         "Codec": {
           "type": "string",
-          "enum": ["gif", "H.264", "mpeg2", "v8"]
+          "enum": ["gif", "H.264", "mpeg2", "vp8"]
         },
         "CodecOptions": {
           "type": "object",
